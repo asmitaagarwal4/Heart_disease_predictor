@@ -1,5 +1,8 @@
-import React from "react";
-import Page from "./Components/Page";
+import { useState } from 'react'
+import './App.css'
+import Signup from './Components/Signup'
+import Signin from './Components/Signin'
+
 
 function App() {
   return (
