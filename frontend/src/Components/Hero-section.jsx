@@ -7,12 +7,12 @@ export function HeroSection() {
       <div className="container mx-auto px-4 py-16">
         <div className="grid md:grid-cols-2 gap-8 items-center">
           {/* Left Content */}
-          <div className="text-white space-y-6">
+          <div className="text-white space-y-6 p-4">
             <h1 className="text-3xl md:text-4xl font-medium leading-tight">
               HeartCare AI is a cutting-edge tool designed to assist doctors in making informed decisions about heart
               disease.
             </h1>
-            <p className="text-emerald-50 text-lg">
+            <p className="text-emerald-50 text-md">
               With our powerful machine learning model, you can input patient-specific parameters to instantly receive a
               probability assessment of heart disease. The app also provides a centralized platform for managing patient
               history, enabling you to track and analyze past records effortlessly.

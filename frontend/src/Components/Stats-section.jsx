@@ -14,7 +14,7 @@ function StatsSection() {
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Left Content */}
-          <div className="text-emerald-800 space-y-6">
+          <div className="text-emerald-800 space-y-6 p-10">
             <h2 className="text-2xl font-medium">
               HeartCare AI is more than just a prediction tool—it's a comprehensive platform built to enhance patient
               care and support clinical decision-making.

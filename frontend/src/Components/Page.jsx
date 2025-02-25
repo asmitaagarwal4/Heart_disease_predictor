@@ -25,7 +25,7 @@ export default function Page() {
 
       {/* Footer */}
       <footer className="bg-gradient-to-b from-emerald-400 to-emerald-500 py-12">
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-2 flex">
           <Button variant="link" className="text-white hover:text-emerald-100">
             <Link to="#">Contact us</Link>
           </Button>
