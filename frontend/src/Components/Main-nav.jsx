@@ -1,20 +1,23 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/Components/ui/sheet";
 
 const navigation = [
   { name: "Visualisations", href: "#" },
   { name: "Predictor", href: "#" },
-  { name: "Patients", href: "#" },
+  { name: "Patients", href: "/patients" },
   { name: "About us", href: "#" },
 ];
 
 export function MainNav() {
+  const navigate = useNavigate();
+
   return (
     <div className="flex items-center justify-between w-full p-3">
-      <a href="/" className="text-2xl font-semibold text-white">
+      <Link to="/" className="text-2xl font-semibold text-white">
         HeartCare AI
-      </a>
+      </Link>
 
       {/* Desktop Navigation */}
       <nav className="hidden md:flex items-center space-x-8">
@@ -27,10 +30,16 @@ export function MainNav() {
             {item.name}
           </a>
         ))}
-        <button className="text-white hover:text-emerald-100 hover:bg-emerald-500/20 px-4 py-2 rounded">
+        <button
+          onClick={() => navigate("/signup")}
+          className="text-white hover:text-emerald-100 hover:bg-emerald-500/20 px-4 py-2 rounded cursor-pointer"
+        >
           Sign up
         </button>
-        <button className="text-white hover:text-emerald-100 border border-white hover:bg-emerald-500/20 px-4 py-2 rounded">
+        <button
+          onClick={() => navigate("/signin")}
+          className="text-white hover:text-emerald-100 border border-white hover:bg-emerald-500/20 px-4 py-2 rounded cursor-pointer"
+        >
           Sign in
         </button>
       </nav>
@@ -53,10 +62,16 @@ export function MainNav() {
                 {item.name}
               </a>
             ))}
-            <button className="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded">
+            <button
+              onClick={() => navigate("/signup")}
+              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded"
+            >
               Sign up
             </button>
-            <button className="w-full border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded">
+            <button
+              onClick={() => navigate("/signin")}
+              className="w-full border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded"
+            >
               Sign in
             </button>
           </nav>
