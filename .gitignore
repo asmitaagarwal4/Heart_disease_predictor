@@ -1,0 +1,39 @@
+# Node modules and build files (React)
+node_modules/
+build/
+dist/
+.npm/
+.npmrc
+.yarn/
+.yarnrc
+package-lock.json
+yarn.lock
+
+# Python virtual environment and dependencies (Flask)
+venv/
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+Pipfile
+Pipfile.lock
+
+# Logs and environment files
+*.log
+.env.local
+.env.development
+.env.production
+.DS_Store
+
+# IDE and system files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Database and migrations (if applicable)
+instance/
+migrations/
