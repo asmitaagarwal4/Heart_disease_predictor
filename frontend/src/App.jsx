@@ -3,15 +3,14 @@ import './App.css'
 import Signup from './Components/Signup'
 import Signin from './Components/Signin'
 
-function App() {
-  const [count, setCount] = useState(0)
 
+function App() {
   return (
-    <>
-    {/* <Signup /> */}
-    <Signin />
-    </>
-  )
+    <div>
+      <Page />
+    </div>
+  );
 }
 
-export default App
+export default App;
+
