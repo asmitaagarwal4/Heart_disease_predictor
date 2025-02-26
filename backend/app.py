@@ -4,13 +4,22 @@ import pickle
 import pandas as pd
 from preprocess import preprocess
 from flask_cors import CORS
+import os
+from dotenv import load_dotenv
+from flask_pymongo import PyMongo
+from flask_jwt_extended import JWTManager
+from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, decode_token
+
+
 preprocessor = pickle.load(open('preprocessor.pkl', 'rb'))
 model = pickle.load(open('model.pkl', 'rb'))
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
  # ✅ Configure MongoDB Atlas
-app.config["MONGO_URI"] = "your_mongodb_uri_here"  # Load from environment variable
+load_dotenv()
+MONGO_URI = os.getenv("MONGO_URI")
+app.config["MONGO_URI"] = MONGO_URI # Load from environment variable
 app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY", "your_secret_key_here")  # Load from environment variable
 
 # ✅ Initialize MongoDB and JWT
