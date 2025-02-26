@@ -1,4 +1,5 @@
 import { useState } from "react";
+import MainNav from "./Main-nav";
 
 const PredictForm = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +16,6 @@ const PredictForm = () => {
     slope: "",
     ca: "",
     thal: "",
-    HeartDisease: "",
   });
 
   const handleChange = (e) => {
@@ -38,6 +38,14 @@ const PredictForm = () => {
   };
 
   return (
+    <div className="min-h-screen bg-emerald-50">
+    <header className="bg-gradient-to-r from-emerald-400 to-emerald-500">
+    <div className="container mx-auto px-4">
+      <div className="h-16">
+        <MainNav />
+      </div>
+    </div>
+  </header>
     <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-xl">
       <h2 className="text-xl font-bold mb-4 text-center">Heart Disease Prediction</h2>
       <form onSubmit={handleSubmit} className="space-y-3">
@@ -61,6 +69,7 @@ const PredictForm = () => {
           Predict
         </button>
       </form>
+    </div>
     </div>
   );
 };

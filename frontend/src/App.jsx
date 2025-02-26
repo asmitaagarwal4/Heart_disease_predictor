@@ -5,6 +5,7 @@ import Page from "./Components/Page";
 import Signin from "./Components/Signin";
 import Signup from "./Components/Signup";
 import Patients from "./Components/Patients";
+import PredictForm from "./Components/predict-form";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/patients" element={<Patients />} />
+        <Route path="/predict" element={<PredictForm />} />
       </Routes>
   );
 }
