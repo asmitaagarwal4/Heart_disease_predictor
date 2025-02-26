@@ -7,7 +7,7 @@ import axios from "axios";
 export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
-  const [DOB, setDOB] = useState("");
+  const [phone, setPhone] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function Signup() {
     const signupHandler = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:3000/api/auth/register", {name, DOB, email, password}, {
+            const res = await axios.post("http://127.0.0.1:5000/register", {name, phone, email, password}, {
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -60,14 +60,14 @@ export default function Signup() {
                 </div>
                 <div className="space-y-1">
                   <div className="flex justify-between items-center">
-                    <label className="text-sm text-gray-600">Date of Birth</label>
+                    <label className="text-sm text-gray-600">Phone Number</label>
                   </div>
                   <input
                     type="text"
-                    name="DOB"
-                    value={DOB}
-                    onChange={(e) => setDOB(e.target.value)}
-                    placeholder="DD/MM/YYYY"
+                    name="Phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="Enter your phone number"
                     className="border p-2 w-full border-emerald-500 rounded"
                   />
                 </div>

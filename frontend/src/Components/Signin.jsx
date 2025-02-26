@@ -1,9 +1,30 @@
 import { useState } from "react";
 import doctor from "../assets/image.png";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function Signin() {
   const [showPassword, setShowPassword] = useState(false);
-
+  const [email,setEmail] = useState("");
+  const [password,setPassword] = useState("");
+  const navigate = useNavigate();
+  const signinHandler = async (e) => {
+    e.preventDefault();
+    try {
+        const res = await axios.post("http://127.0.0.1:5000/login", { email, password}, {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            withCredentials: true
+        });
+        if(res.status === 200) {
+            alert("Signin successful");
+            navigate("/");
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
   return (
     <>
       <div className="flex justify-between items-center mb-8">
@@ -26,6 +47,9 @@ export default function Signin() {
                   <input
                     type="email"
                     placeholder="Enter your email"
+                    name= "email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="border p-2 w-full border-emerald-500 rounded"
                   />
                 </div>
@@ -37,6 +61,9 @@ export default function Signin() {
                     <input
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter your password"
+                      name= "password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       className="border p-2 w-full rounded"
                     />
                     <button
@@ -48,8 +75,10 @@ export default function Signin() {
                   </div>
                 </div>
               </div>
-              <button className="w-full bg-emerald-500 text-white p-2 rounded">
-                Sign up
+              <button className="w-full bg-emerald-500 text-white p-2 rounded"
+                onClick={signinHandler}
+              >
+                Sign In
               </button>
               <div className="relative flex items-center gap-2 py-2">
                 <span className="border-t flex-grow"></span>

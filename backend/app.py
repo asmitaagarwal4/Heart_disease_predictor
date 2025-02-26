@@ -9,13 +9,16 @@ from dotenv import load_dotenv
 from flask_pymongo import PyMongo
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, decode_token
+import bcrypt
+import datetime
+
 
 
 preprocessor = pickle.load(open('preprocessor.pkl', 'rb'))
 model = pickle.load(open('model.pkl', 'rb'))
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
+CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}}, supports_credentials=True)
  # ✅ Configure MongoDB Atlas
 load_dotenv()
 MONGO_URI = os.getenv("MONGO_URI")
@@ -82,11 +85,30 @@ def register():
     return jsonify({"message": "Doctor registered successfully", "doctor_id": str(doctor_id)}), 201
 
 # ✅ Login Doctor
+# @app.route("/login", methods=["POST"])
+# def login():
+#     data = request.json
+#     doctor = mongo.db.doctors.find_one({"email": data["email"]})
+    
+#     if doctor and bcrypt.checkpw(data["password"].encode("utf-8"), doctor["password"]):
+#         # ✅ Set JWT Expiry (e.g., 1 hour)
+#         access_token = create_access_token(identity=str(doctor["_id"]), expires_delta=datetime.timedelta(hours=1))
+#         decoded_token = decode_token(access_token)  # Decode JWT to check expiration
+#         print("✅ Token Expiry (UTC):", datetime.datetime.fromtimestamp(decoded_token["exp"], datetime.UTC))
+        
+#         return jsonify({
+#             "access_token": f"Bearer {access_token}",  # Prepend "Bearer "
+#             "expires_at": decoded_token["exp"]
+#         }), 200
+
+#     return jsonify({"message": "Invalid email or password"}), 401
+
+@app.route("/login", methods=["POST"])
 def login():
     data = request.json
     doctor = mongo.db.doctors.find_one({"email": data["email"]})
     
-    if doctor and bcrypt.checkpw(data["password"].encode("utf-8"), doctor["password"]):
+    if doctor and bcrypt.checkpw(data["password"].encode("utf-8"), doctor["password"].encode("utf-8")):
         # ✅ Set JWT Expiry (e.g., 1 hour)
         access_token = create_access_token(identity=str(doctor["_id"]), expires_delta=datetime.timedelta(hours=1))
         decoded_token = decode_token(access_token)  # Decode JWT to check expiration
