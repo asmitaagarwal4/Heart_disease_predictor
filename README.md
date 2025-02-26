@@ -149,6 +149,17 @@ HEART_DISEASE_PREDICTOR/
 ## Contributing
 Contributions are welcome! Feel free to fork the repository and submit pull requests.
 
+## Future Improvements 
+1. Predict output - replace alert with dialogue box 
+2. Enhance prediction form - UI UX 
+3. Work on Visualisation page 
+4. Enhance model currently at 0.92 accuracy 
+5. Make the About Us page 
+6. Continue with google feature ( for signing in )
+7. Make patient list and integrate it 
+8. Resgistered sucessfully alert !
+9. Optimise the model.
+
 ## License
 This project is licensed under the MIT License.
 
