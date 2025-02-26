@@ -1,8 +1,34 @@
 import { useState } from "react";
 import doctor from "../assets/image.png";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+
+    const signupHandler = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await axios.post("http://127.0.0.1:5000/register", {name, phone, email, password}, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true
+            });
+            if(res.status === 200) {
+                alert("Signup successful");
+                navigate("/signin");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
   return (
     <>
@@ -25,18 +51,24 @@ export default function Signup() {
                   </div>
                   <input
                     type="text"
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     placeholder="Enter your name"
-                    className="border p-2 w-full rounded"
+                    className="border p-2 w-full border-emerald-500 rounded"
                   />
                 </div>
                 <div className="space-y-1">
                   <div className="flex justify-between items-center">
-                    <label className="text-sm text-gray-600">Date of Birth</label>
+                    <label className="text-sm text-gray-600">Phone Number</label>
                   </div>
                   <input
                     type="text"
-                    placeholder="DD/MM/YYYY"
-                    className="border p-2 w-full rounded"
+                    name="Phone"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="Enter your phone number"
+                    className="border p-2 w-full border-emerald-500 rounded"
                   />
                 </div>
                 <div className="space-y-1">
@@ -45,6 +77,9 @@ export default function Signup() {
                   </div>
                   <input
                     type="email"
+                    name="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
                     className="border p-2 w-full border-emerald-500 rounded"
                   />
@@ -56,8 +91,11 @@ export default function Signup() {
                   <div className="relative">
                     <input
                       type={showPassword ? "text" : "password"}
+                      name="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       placeholder="Enter your password"
-                      className="border p-2 w-full rounded"
+                      className="border p-2 w-full border-emerald-500 rounded"
                     />
                     <button
                       onClick={() => setShowPassword(!showPassword)}
@@ -68,7 +106,9 @@ export default function Signup() {
                   </div>
                 </div>
               </div>
-              <button className="w-full bg-emerald-500 text-white p-2 rounded">
+              <button className="w-full bg-emerald-500 text-white p-2 rounded" 
+              onClick={signupHandler}
+              >
                 Sign up
               </button>
               <div className="relative flex items-center gap-2 py-2">
@@ -76,7 +116,7 @@ export default function Signup() {
                 <span className="text-xs uppercase bg-white">or</span>
                 <span className="border-t flex-grow"></span>
               </div>
-              <button className="w-full border p-2 flex justify-center items-center rounded">
+              <button className="w-full border p-2 flex justify-center items-center border-emerald-500 rounded">
                 <img
                   src="https://www.google.com/favicon.ico"
                   alt="Google"
@@ -88,7 +128,7 @@ export default function Signup() {
               </button>
               <p className="text-center text-sm text-gray-600">
                 Already have an account?{" "}
-                <a href="#" className="text-emerald-500 underline">
+                <a href="/signin" className="text-emerald-500 underline">
                   Sign in
                 </a>
               </p>

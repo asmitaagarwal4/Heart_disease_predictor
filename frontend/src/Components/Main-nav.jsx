@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/Components/ui/sheet";
@@ -12,6 +12,14 @@ const navigation = [
 
 export function MainNav() {
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const [loggedIn, setLoggedIn] = useState(!!token);
+
+  const logoutHandler = () => {
+    localStorage.removeItem("token");
+    setLoggedIn(false);
+    navigate("/signin");
+  };
 
   return (
     <div className="flex items-center justify-between w-full p-3">
@@ -30,18 +38,29 @@ export function MainNav() {
             {item.name}
           </a>
         ))}
-        <button
-          onClick={() => navigate("/signup")}
-          className="text-white hover:text-emerald-100 hover:bg-emerald-500/20 px-4 py-2 rounded cursor-pointer"
-        >
-          Sign up
-        </button>
-        <button
-          onClick={() => navigate("/signin")}
-          className="text-white hover:text-emerald-100 border border-white hover:bg-emerald-500/20 px-4 py-2 rounded cursor-pointer"
-        >
-          Sign in
-        </button>
+        {!loggedIn ? (
+          <>
+            <button
+              onClick={() => navigate("/signup")}
+              className="text-white hover:text-emerald-100 hover:bg-emerald-500/20 px-4 py-2 rounded cursor-pointer"
+            >
+              Sign up
+            </button>
+            <button
+              onClick={() => navigate("/signin")}
+              className="text-white hover:text-emerald-100 border border-white hover:bg-emerald-500/20 px-4 py-2 rounded cursor-pointer"
+            >
+              Sign in
+            </button>
+          </>
+        ) : (
+          <button
+            onClick={logoutHandler}
+            className="text-white hover:text-emerald-100 border border-white hover:bg-emerald-800/20 px-4 py-2 rounded cursor-pointer"
+          >
+            Logout
+          </button>
+        )}
       </nav>
 
       {/* Mobile Navigation */}
@@ -62,18 +81,29 @@ export function MainNav() {
                 {item.name}
               </a>
             ))}
-            <button
-              onClick={() => navigate("/signup")}
-              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded"
-            >
-              Sign up
-            </button>
-            <button
-              onClick={() => navigate("/signin")}
-              className="w-full border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded"
-            >
-              Sign in
-            </button>
+            {!loggedIn ? (
+              <>
+                <button
+                  onClick={() => navigate("/signup")}
+                  className="w-full bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded"
+                >
+                  Sign up
+                </button>
+                <button
+                  onClick={() => navigate("/signin")}
+                  className="w-full border border-gray-300 text-gray-700 hover:bg-gray-100 py-2 rounded"
+                >
+                  Sign in
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={logoutHandler}
+                className="w-full border border-red-500 text-red-500 hover:bg-red-500/20 py-2 rounded"
+              >
+                Logout
+              </button>
+            )}
           </nav>
         </SheetContent>
       </Sheet>
