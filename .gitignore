@@ -11,6 +11,8 @@ yarn.lock
 
 # Python virtual environment and dependencies (Flask)
 venv/
+venv38/
+venv311/
 .env
 __pycache__/
 *.pyc
