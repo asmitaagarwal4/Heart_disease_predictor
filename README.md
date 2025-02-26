@@ -1,5 +1,7 @@
 # HeartCareAI
 HeartCareAI is a web application designed to assist medical professionals in predicting heart disease risk using machine learning. It provides features for managing patient data, performing predictions, and securely handling user authentication.
+
+
 <img width="651" alt="img1" src="https://github.com/user-attachments/assets/410ba77f-0009-4676-a268-3490910d55ca" />
 
 <img width="800" alt="img2" src="https://github.com/user-attachments/assets/d5935c41-4656-49fc-8480-d1b0eb1e516b" />
