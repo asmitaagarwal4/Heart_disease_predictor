@@ -56,7 +56,7 @@ export function MainNav() {
         ) : (
           <button
             onClick={logoutHandler}
-            className="text-white hover:text-emerald-100 border border-white hover:bg-emerald-500/20 px-4 py-2 rounded cursor-pointer"
+            className="text-white hover:text-emerald-100 border border-white hover:bg-emerald-800/20 px-4 py-2 rounded cursor-pointer"
           >
             Logout
           </button>
