@@ -18,6 +18,7 @@ export default function Signin() {
             withCredentials: true
         });
         if(res.status === 200) {
+            localStorage.setItem("token", res.data.token);
             alert("Signin successful");
             navigate("/");
         }
