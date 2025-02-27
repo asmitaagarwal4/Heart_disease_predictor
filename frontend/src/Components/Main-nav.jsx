@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/Components/ui/sheet";
+import toast, { Toaster } from 'react-hot-toast';
 
 const navigation = [
   { name: "Visualisations", href: "#" },
@@ -15,14 +16,18 @@ export function MainNav() {
   const token = localStorage.getItem("token");
   const [loggedIn, setLoggedIn] = useState(!!token);
 
+  const notifyLogout = () => toast('Logout successful', {duration: 1000});
+
   const logoutHandler = () => {
     localStorage.removeItem("token");
+    notifyLogout();
     setLoggedIn(false);
     navigate("/signin");
   };
 
   return (
     <div className="flex items-center justify-between w-full p-3">
+      <Toaster />
       <Link to="/" className="text-2xl font-semibold text-white">
         HeartCare AI
       </Link>

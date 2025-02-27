@@ -2,6 +2,7 @@ import { useState } from "react";
 import doctor from "../assets/image.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast';
 
 
 export default function Signup() {
@@ -12,6 +13,8 @@ export default function Signup() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
+    const notifysignup = () => toast('Account crerated successfully', {duration: 1000});
+
     const signupHandler = async (e) => {
         e.preventDefault();
         try {
@@ -21,9 +24,11 @@ export default function Signup() {
                 },
                 withCredentials: true
             });
-            if(res.status === 200) {
-                alert("Signup successful");
-                navigate("/signin");
+            if(res.status === 201) {
+                notifysignup();
+                setTimeout(() => {
+                  navigate("/signin");
+                }, 1000);
             }
         } catch (error) {
             console.log(error);
@@ -99,14 +104,14 @@ export default function Signup() {
                     />
                     <button
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-2.5 text-sm"
+                      className="absolute right-3 top-2.5 text-sm cursor-pointer"
                     >
                       {showPassword ? "Hide" : "Show"}
                     </button>
                   </div>
                 </div>
               </div>
-              <button className="w-full bg-emerald-500 text-white p-2 rounded" 
+              <button className="w-full bg-emerald-500 text-white p-2 rounded cursor-pointer" 
               onClick={signupHandler}
               >
                 Sign up
@@ -116,7 +121,7 @@ export default function Signup() {
                 <span className="text-xs uppercase bg-white">or</span>
                 <span className="border-t flex-grow"></span>
               </div>
-              <button className="w-full border p-2 flex justify-center items-center border-emerald-500 rounded">
+              <button className="w-full border p-2 flex justify-center items-center border-emerald-500 rounded cursor-pointer">
                 <img
                   src="https://www.google.com/favicon.ico"
                   alt="Google"
@@ -128,7 +133,7 @@ export default function Signup() {
               </button>
               <p className="text-center text-sm text-gray-600">
                 Already have an account?{" "}
-                <a href="/signin" className="text-emerald-500 underline">
+                <a href="/signin" className="text-emerald-500 underline cursor-pointer">
                   Sign in
                 </a>
               </p>
