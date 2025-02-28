@@ -63,7 +63,7 @@ HEART_DISEASE_PREDICTOR/
 - Components for data visualization and predictions.
 
 ## Prerequisites
-- Python 3.7 or higher
+- Python 3.11 
 - Node.js and npm
 - MongoDB Atlas or local MongoDB setup
 

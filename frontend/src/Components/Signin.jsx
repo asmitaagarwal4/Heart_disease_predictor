@@ -2,12 +2,16 @@ import { useState } from "react";
 import doctor from "../assets/image.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Signin() {
   const [showPassword, setShowPassword] = useState(false);
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState("");
   const navigate = useNavigate();
+
+  const notifyLogin = () => toast('Signin successful', {duration: 1000});
+
   const signinHandler = async (e) => {
     e.preventDefault();
     try {
@@ -19,8 +23,10 @@ export default function Signin() {
         });
         if(res.status === 200) {
             localStorage.setItem("token", res.data.token);
-            alert("Signin successful");
-            navigate("/");
+            notifyLogin();
+            setTimeout(() => {
+                navigate("/");
+            }, 1000);
         }
     } catch (error) {
         console.log(error);
@@ -29,6 +35,7 @@ export default function Signin() {
   return (
     <>
       <div className="flex justify-between items-center mb-8">
+        <Toaster />
         <h1 className="text-xl font-semibold">HeartCare AI</h1>
       </div>
 
@@ -69,14 +76,14 @@ export default function Signin() {
                     />
                     <button
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-2.5 text-sm"
+                      className="absolute right-3 top-2.5 text-sm cursor-pointer"
                     >
                       {showPassword ? "Hide" : "Show"}
                     </button>
                   </div>
                 </div>
               </div>
-              <button className="w-full bg-emerald-500 text-white p-2 rounded"
+              <button className="w-full bg-emerald-500 text-white p-2 rounded cursor-pointer"
                 onClick={signinHandler}
               >
                 Sign In
@@ -86,7 +93,7 @@ export default function Signin() {
                 <span className="text-xs uppercase bg-white">or</span>
                 <span className="border-t flex-grow"></span>
               </div>
-              <button className="w-full border p-2 flex justify-center items-center rounded">
+              <button className="w-full border p-2 flex justify-center items-center rounded cursor-pointer">
                 <img
                   src="https://www.google.com/favicon.ico"
                   alt="Google"
