@@ -34,7 +34,7 @@ export function AboutUs() {
             onClick={() => navigate("/team")}
               size="lg"
               variant="secondary"
-              className="bg-white text-emerald-600 hover:bg-emerald-50 transition duration-300"
+              className="bg-white text-emerald-600 hover:bg-emerald-50 transition duration-300 cursor-pointer"
             >
               Meet the Team
             </Button>

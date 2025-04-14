@@ -1,7 +1,10 @@
 import React from "react";
 import { Button } from "@/Components/ui/button";
 import HomePageImg from "../assets/homeimg.png";
+import { useNavigate } from "react-router-dom";
+
 export function HeroSection() {
+  const navigate = useNavigate();
   return (
     <section className="relative bg-gradient-to-br from-emerald-400 to-emerald-500 overflow-hidden">
       <div className="container mx-auto px-4 py-16">
@@ -17,7 +20,10 @@ export function HeroSection() {
               probability assessment of heart disease. The app also provides a centralized platform for managing patient
               history, enabling you to track and analyze past records effortlessly.
             </p>
-            <Button size="lg" variant="secondary" className="bg-white text-emerald-600 hover:bg-emerald-50">
+            <Button
+            onClick={() => navigate("/about")}
+             size="lg" variant="secondary" 
+             className="bg-white text-emerald-600 hover:bg-emerald-50 cursor-pointer">
               Know more
             </Button>
           </div>
