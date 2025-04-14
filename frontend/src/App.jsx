@@ -8,16 +8,16 @@ import Patients from "./Components/Patients";
 import PredictForm from "./Components/predict-form";
 import ProtectedRoute from "./Components/ContextAPI/ProtectedRoute";
 import AddPatient from "./Components/AddPatient";
-
+import Visualisation from "./Components/Visualisation";
 function App() {
   return (
       <Routes>
         <Route path="/" element={<Page />} />
-
         <Route element={<ProtectedRoute />}>
             <Route path="/patients" element={<Patients />} />
             <Route path="/predict" element={<PredictForm />} />
             <Route path="/addpatient" element={<AddPatient />} />
+            <Route path="/visuals" element={<Visualisation />} />
         </Route>
 
         <Route path="/signin" element={<Signin />} />

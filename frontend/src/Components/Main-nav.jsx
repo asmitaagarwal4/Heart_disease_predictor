@@ -5,10 +5,10 @@ import { Sheet, SheetContent, SheetTrigger } from "@/Components/ui/sheet";
 import toast, { Toaster } from 'react-hot-toast';
 
 const navigation = [
-  { name: "Visualisations", href: "#" },
+  { name: "Visualisations", href: "/visuals" },
   { name: "Predictor", href: "/predict" },
   { name: "Patients", href: "/patients" },
-  { name: "About us", href: "#" },
+  { name: "About us", href: "/about" },
 ];
 
 export function MainNav() {
