@@ -92,7 +92,9 @@ const Patients = () => {
                       <td className="px-4">{patient._id}</td>
                       <td className="px-4">{patient.phone}</td>
                       <td className="px-4 text-center">
-                        <button className="text-green-700 hover:text-green-900">
+                        <button 
+                        onClick={() => navigate(`/patient/${patient._id}`)}
+                        className="text-green-700 hover:text-green-900">
                           <ArrowRight size={20} />
                         </button>
                       </td>

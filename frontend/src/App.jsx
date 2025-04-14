@@ -11,6 +11,7 @@ import AddPatient from "./Components/AddPatient";
 import AboutUs from "./Components/AboutUs";
 import Visualisation from "./Components/Visualisation";
 import TeamPage from "./Components/TeamPage";
+import PatientDetails from "./Components/PatientDetails";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/predict" element={<PredictForm />} />
             <Route path="/addpatient" element={<AddPatient />} />
             <Route path="/visuals" element={<Visualisation />} />
+            <Route path="/patient/:id" element={<PatientDetails />} />
         </Route>
 
         <Route path="/signin" element={<Signin />} />

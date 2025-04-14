@@ -12,6 +12,8 @@ from flask_jwt_extended import JWTManager
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity, decode_token
 import bcrypt
 import datetime
+from flask import Blueprint, jsonify
+from pymongo import errors
 
 
 
@@ -200,6 +202,42 @@ def get_patients():
         pat["_id"] = str(pat["_id"])  # Convert ObjectId to string
     
     return jsonify(patients)
+
+
+# patients_bp = Blueprint('patients', __name__)
+
+@app.route('/patients/<id>', methods=['GET'])
+@jwt_required()
+def get_patient(id):
+    try:
+        # Get current doctor's ID from JWT
+        current_doctor_id = ObjectId(get_jwt_identity())
+        
+        # Convert string ID to ObjectId
+        patient_id = ObjectId(id)
+        
+        # Find patient with matching ID and doctor ID
+        patient = mongo.db.patients.find_one({
+            "_id": patient_id,
+            "doctor_id": current_doctor_id
+        })
+        print(f"Fetching patient with ID: {patient_id} for doctor ID: {current_doctor_id}")
+
+        if not patient:
+            return jsonify({"error": "Patient not found"}), 404
+
+        # Convert ObjectIds to strings for JSON serialization
+        patient["_id"] = str(patient["_id"])
+        patient["doctor_id"] = str(patient["doctor_id"])
+
+        print("Patient found:", patient)
+
+        return jsonify(patient), 200
+
+    except (errors.InvalidId, TypeError):
+        return jsonify({"error": "Invalid patient ID format"}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
      
 
 if __name__ == '__main__':
