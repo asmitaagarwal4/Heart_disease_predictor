@@ -10,6 +10,7 @@ import ProtectedRoute from "./Components/ContextAPI/ProtectedRoute";
 import AddPatient from "./Components/AddPatient";
 import AboutUs from "./Components/AboutUs";
 import Visualisation from "./Components/Visualisation";
+import TeamPage from "./Components/TeamPage";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/team" element={<TeamPage />} />
         
       </Routes>
   );
