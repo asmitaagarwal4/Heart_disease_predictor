@@ -7,6 +7,7 @@ import Signup from "./Components/Signup";
 import Patients from "./Components/Patients";
 import PredictForm from "./Components/predict-form";
 import ProtectedRoute from "./Components/ContextAPI/ProtectedRoute";
+import AddPatient from "./Components/AddPatient";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
             <Route path="/patients" element={<Patients />} />
             <Route path="/predict" element={<PredictForm />} />
+            <Route path="/addpatient" element={<AddPatient />} />
         </Route>
 
         <Route path="/signin" element={<Signin />} />
