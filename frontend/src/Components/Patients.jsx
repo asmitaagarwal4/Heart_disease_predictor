@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowRight, UserPlus } from "lucide-react";
 import MainNav from "./Main-nav";
+import { useNavigate } from "react-router-dom";
 
 const patients = [
   {
@@ -34,6 +35,7 @@ const patients = [
 ];
 
 const Patients = () => {
+  const navigate = useNavigate();
   return (
     <>
       {/* Navigation Bar */}
@@ -48,7 +50,7 @@ const Patients = () => {
           {/* Header */}
           <div className="flex justify-between items-center mb-4 px-4">
             <h2 className="text-xl font-bold text-green-900">Patients List</h2>
-            <button className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:bg-green-600 text-white px-4 py-2 flex items-center rounded-lg">
+            <button onClick={() => navigate("/addpatient")} className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:bg-green-600 text-white px-4 py-2 flex items-center rounded-lg">
               <UserPlus className="mr-2" size={18} />
               Add new patient
             </button>
