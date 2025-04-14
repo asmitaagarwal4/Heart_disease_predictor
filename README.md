@@ -12,42 +12,60 @@ HeartCareAI is a web application designed to assist medical professionals in pre
 ## Project Structure
 ```
 HEART_DISEASE_PREDICTOR/
-|
-|-- backend/
-|   |-- __pycache__/
-|   |-- .env
-|   |-- app.py
-|   |-- Ch3.ClevelandData.xlsx
-|   |-- model.ipynb
-|   |-- model.pkl
-|   |-- models.py
-|   |-- preprocess.py
-|   |-- preprocessor.pkl
-|
-|-- frontend/
-|   |-- node_modules/
-|   |-- public/
-|   |-- src/
-|       |-- assets/
-|       |-- Components/
-|           |-- ui/
-|               |-- Animated-stats.jsx
-|               |-- Hero-section.jsx
-|               |-- Main-nav.jsx
-|               |-- Page.jsx
-|               |-- Patients.jsx
-|               |-- predict-form.jsx
-|               |-- Signin.jsx
-|               |-- Signup.jsx
-|               |-- Stats-section.jsx
-|       |-- lib/
-|       |-- App.css
-|       |-- App.jsx
-|       |-- index.css
-|       |-- main.jsx
-|   |-- .gitignore
-|   |-- components.json
-|   |-- eslint.config.js
+│
+├── backend/
+│   ├── __pycache__/
+│   ├── .env
+│   ├── app.py
+│   ├── Ch3.ClevelandData.xlsx
+│   ├── model.ipynb
+│   ├── model.pkl
+│   ├── models.py
+│   ├── preprocess.py
+│   └── preprocessor.pkl
+│
+├── frontend/
+│   ├── public/
+│   │   └── favicon.ico (or static stuff if needed)
+│   │
+│   ├── src/
+│   │   ├── assets/                  ✅ IMAGE ASSETS GO HERE
+│   │   │   ├── pairplot.jpeg
+│   │   │   ├── boxplot.jpeg
+│   │   │   ├── distribution.jpeg
+│   │   │   ├── doctor.svg
+│   │   │   ├── homeimg.png
+│   │   │   └── image.png
+│   │   │
+│   │   ├── Components/
+│   │   │   ├── ContextAPI/
+│   │   │   │   └── ProtectedRoute.jsx
+│   │   │   │
+│   │   │   ├── ui/                 ✅ REUSABLE UI COMPONENTS
+│   │   │   │   ├── Animated-stats.jsx
+│   │   │   │   ├── Hero-section.jsx
+│   │   │   │   ├── Main-nav.jsx
+│   │   │   │   ├── Stats-section.jsx
+│   │   │   │
+│   │   │   ├── AboutUs.jsx
+│   │   │   ├── AddPatient.jsx
+│   │   │   ├── Page.jsx
+│   │   │   ├── Patients.jsx
+│   │   │   ├── predict-form.jsx
+│   │   │   ├── Signin.jsx
+│   │   │   ├── Signup.jsx
+│   │   │   └── Visualisation.jsx   ✅ VISUALISATION COMPONENT USING IMPORTED IMAGES
+│   │   │
+│   │   ├── App.jsx
+│   │   ├── App.css
+│   │   ├── index.css
+│   │   ├── main.jsx
+│   │   └── lib/                    ✅ (Optional utils/helpers here)
+│   │
+│   ├── .gitignore
+│   ├── components.json
+│   ├── eslint.config.js
+│   └── package.json
 ```
 
 ## Features
