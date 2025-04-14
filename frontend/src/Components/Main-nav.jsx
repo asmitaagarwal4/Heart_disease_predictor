@@ -8,7 +8,7 @@ const navigation = [
   { name: "Visualisations", href: "#" },
   { name: "Predictor", href: "/predict" },
   { name: "Patients", href: "/patients" },
-  { name: "About us", href: "#" },
+  { name: "About us", href: "/about" },
 ];
 
 export function MainNav() {
