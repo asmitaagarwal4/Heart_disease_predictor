@@ -107,19 +107,29 @@ def register():
 @app.route("/login", methods=["POST"])
 def login():
     data = request.json
-    doctor = mongo.db.doctors.find_one({"email": data["email"]})
-    
-    if doctor and bcrypt.checkpw(data["password"].encode("utf-8"), doctor["password"].encode("utf-8")):
-        # ✅ Set JWT Expiry (e.g., 1 hour)
-        access_token = create_access_token(identity=str(doctor["_id"]), expires_delta=datetime.timedelta(hours=1))
-        decoded_token = decode_token(access_token)  # Decode JWT to check expiration
-        print("✅ Token Expiry (UTC):", datetime.datetime.fromtimestamp(decoded_token["exp"], datetime.UTC))
-        
-        return jsonify({
-            "access_token": f"Bearer {access_token}",  # Prepend "Bearer "
-            "expires_at": decoded_token["exp"]
-        }), 200
 
+    # Check if email exists in the database
+    doctor = mongo.db.doctors.find_one({"email": data.get("email")})
+    
+    if doctor and bcrypt.checkpw(data.get("password", "").encode("utf-8"), doctor["password"].encode("utf-8")):
+        try:
+            # Create JWT with 1-hour expiry
+            access_token = create_access_token(identity=str(doctor["_id"]), expires_delta=datetime.timedelta(hours=1))
+            
+            # Decode the token to get expiration time
+            decoded_token = decode_token(access_token)
+            print("✅ Token Expiry (UTC):", datetime.datetime.fromtimestamp(decoded_token["exp"], datetime.timezone.utc))
+            
+            # Return the token and expiration time
+            return jsonify({
+                "token": access_token,  # Do not prepend "Bearer"
+                "expires_at": decoded_token["exp"]
+            }), 200
+        except Exception as e:
+            print("Error creating token:", str(e))
+            return jsonify({"message": "Error generating token"}), 500
+
+    # Invalid credentials
     return jsonify({"message": "Invalid email or password"}), 401
 
 # ✅ Get All Doctors (Protected)
@@ -133,35 +143,50 @@ def get_doctors():
     
     return jsonify(doctors)
 
-# ✅ Add a Patient (Protected)
 @app.route("/patients", methods=["POST"])
 @jwt_required()
 def add_patient():
     data = request.json
-    doctor_id = ObjectId(get_jwt_identity())  # Convert doctor ID to ObjectId
 
-    patient_data = {
-        "doctor_id": doctor_id,
-        "name": data["name"],
-        "age": data["age"],
-        "sex": data["sex"],
-        "cp": data["cp"],
-        "trestbps": data["trestbps"],
-        "chol": data["chol"],
-        "fbs": data["fbs"],
-        "restecg": data["restecg"],
-        "thalach": data["thalach"],
-        "exang": data["exang"],
-        "oldpeak": data["oldpeak"],
-        "slope": data["slope"],
-        "ca": data["ca"],
-        "thal": data["thal"],
-        "phone": data["phone"],
-        "prob": data["prob"]
-    }
-    
-    patient_id = mongo.db.patients.insert_one(patient_data).inserted_id
-    return jsonify({"message": "Patient added successfully", "patient_id": str(patient_id)}), 201
+    # Validate incoming data
+    required_fields = [
+        "name", "age", "sex", "cp", "trestbps", "chol", "fbs", 
+        "restecg", "thalach", "exang", "oldpeak", "slope", "ca"
+    ]
+    missing_fields = [field for field in required_fields if field not in data]
+    if missing_fields:
+        return jsonify({"error": f"Missing fields: {', '.join(missing_fields)}"}), 422
+
+    try:
+        doctor_id = ObjectId(get_jwt_identity())  # Convert doctor ID to ObjectId
+
+        patient_data = {
+            "doctor_id": doctor_id,
+            "name": data["name"],
+            "age": data["age"],
+            "sex": data["sex"],
+            "cp": data["cp"],
+            "trestbps": data["trestbps"],
+            "chol": data["chol"],
+            "fbs": data["fbs"],
+            "restecg": data["restecg"],
+            "thalach": data["thalach"],
+            "exang": data["exang"],
+            "oldpeak": data["oldpeak"],
+            "slope": data["slope"],
+            "ca": data["ca"],
+            "phone": data["phone"],
+            "prob": data["prob"]
+        }
+
+        # Insert patient_data into the database (assuming a MongoDB collection)
+        result = mongo.db.patients.insert_one(patient_data)
+
+
+        return jsonify({"message": "Patient added successfully", "patient_id": str(result.inserted_id)}), 201
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 # ✅ Get All Patients (Protected)
 @app.route("/patients", methods=["GET"])
