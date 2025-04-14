@@ -18,7 +18,7 @@ const team = [
   { name: "Rishita Priyadarshini Saraf", role: "ML model Development", image: rishita },
   { name: "Rudriya Bansal", role: "Research Work and Deployment", image: rudriya },
   { name: "Asmita Agarwal", role: "ML model Development and Backend", image: asmita },
-  { name: "Riti Sinha", role: "Backend and APIs Development", image: riti },
+  { name: "Riti Sinha", role: "Frontend Development and Designing", image: riti },
   { name: "Anshuman Singh", role: "Backend and APIs Development", image: anshuman },
   { name: "Yadubir Jha", role: "Frontend Development and Designing", image: yadubir },
 ];
